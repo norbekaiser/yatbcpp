@@ -26,7 +26,7 @@
 #include <jsoncpp/json/json.h>
 
 namespace yatbcpp{
-    //See also https://core.telegram.org/bots/api#audio
+    //See also https://core.telegram.org/bots/api#keyboardbutton
     class KeyboardButton {
     public:
         KeyboardButton(std::string text);
