@@ -22,6 +22,7 @@
 #endif 
 #include <jsoncpp/json/json.h>
 #include "exceptions/essential_key_missing.h"
+#include "types/telegram_type.h"
 #include "types/KeyboardButton.h"
 
 using namespace yatbcpp;
@@ -35,35 +36,6 @@ KeyboardButton::KeyboardButton(std::string text) : text(text)
 {
 
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Generation Section                                                                                                 //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/**
- * Returns A KeyboardButton based on a Json Object
- * @param Data   a Json Object Containing the necessary and Optional Fields
- * @return KeyboardButton
- */
-KeyboardButton KeyboardButton::fromJson(Json::Value Data) {
-    if(!Data.isMember("text")){
-        throw essential_key_missing("KeyboardButton::text is missing");
-    }
-
-    string text = Data["text"].asString();
-
-    KeyboardButton ret(text);
-
-    if(Data.isMember("request_contact")){
-        ret.setRequest_contact(Data["request_contact"].asBool());
-    }
-    if(Data.isMember("request_location")){
-        ret.setRequest_location(Data["request_location"].asBool());
-    }
-
-    return ret;
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Setter Section                                                                                                     //
