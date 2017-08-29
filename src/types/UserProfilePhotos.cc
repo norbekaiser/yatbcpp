@@ -16,11 +16,7 @@
 #include <experimental/optional> 
 #define optional experimental::optional 
 #endif 
-#include <jsoncpp/json/json.h>
-#include <inc/exceptions/telegram_api_error.h>
-#include "types/telegram_type.h"
 #include "types/PhotoSize.h"
-#include "exceptions/essential_key_missing.h"
 #include "types/UserProfilePhotos.h"
 
 

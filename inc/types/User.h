@@ -23,7 +23,6 @@
 #include <experimental/optional> 
 #define optional experimental::optional 
 #endif 
-#include <jsoncpp/json/json.h>
 #include "telegram_type.h"
 
 namespace yatbcpp{
