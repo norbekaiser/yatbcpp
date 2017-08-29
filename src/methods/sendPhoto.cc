@@ -22,6 +22,9 @@
 using namespace std;
 using namespace yatbcpp;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Constructor Section                                                                                                //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 sendPhoto::sendPhoto(Chat C, std::string photo) : telegram_method("sendPhoto") , chat_id(to_string(C.getId())), Photo(photo)
 {
@@ -38,6 +41,9 @@ sendPhoto::sendPhoto(string chat_id, std::string photo) : telegram_method("sendP
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Outgoing Section                                                                                                   //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Json::Value sendPhoto::toJson() {
     Json::Value Outgoing;
@@ -46,9 +52,6 @@ Json::Value sendPhoto::toJson() {
 
     if(getCaption()){
         Outgoing["caption"] = getCaption().value();
-    }
-    if(getDisable_web_page_preview()){
-        Outgoing["disable_web_page_preview"] = getDisable_web_page_preview().value();
     }
     if(getDisable_notification()){
         Outgoing["disable_notification"] = getDisable_notification().value();
@@ -61,13 +64,14 @@ Json::Value sendPhoto::toJson() {
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Setter Section                                                                                                     //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void sendPhoto::setCaption(const optional<string> &caption) {
     sendPhoto::caption = caption;
 }
 
-void sendPhoto::setDisable_web_page_preview(const std::optional<bool> &disable_web_page_preview) {
-    sendPhoto::disable_web_page_preview = disable_web_page_preview;
-}
 
 void sendPhoto::setDisable_notification(const std::optional<bool> &disable_notification) {
     sendPhoto::disable_notification = disable_notification;
@@ -101,7 +105,9 @@ void sendPhoto::setReplyMarkup(const ForceReply FR){
     sendPhoto::reply_markup = FR;
 }
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Getter Section                                                                                                     //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const string &sendPhoto::getChat_id() const {
     return chat_id;
@@ -115,9 +121,6 @@ const optional<string> &sendPhoto::getCaption() const {
     return caption;
 }
 
-const optional<bool> &sendPhoto::getDisable_web_page_preview() const {
-    return disable_web_page_preview;
-}
 
 const optional<bool> &sendPhoto::getDisable_notification() const {
     return disable_notification;
