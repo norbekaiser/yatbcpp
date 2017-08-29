@@ -13,7 +13,7 @@
 
 
 #include <jsoncpp/json/json.h>
-#include "methods/telegram_method.h"
+#include "methods/telegram_methodJSON.h"
 #include "methods/getMe.h"
 
 using namespace std;
@@ -23,7 +23,7 @@ using namespace yatbcpp;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-getMe::getMe() : telegram_method("getMe")
+getMe::getMe() : telegram_methodJSON("getMe")
 {
 
 }

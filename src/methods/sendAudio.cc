@@ -26,17 +26,17 @@ using namespace yatbcpp;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-sendAudio::sendAudio(Chat C, std::string audio) : telegram_method("sendAudio") , chat_id(to_string(C.getId())), audio(audio)
+sendAudio::sendAudio(Chat C, std::string audio) : telegram_methodJSON("sendAudio"), telegram_methodMultipart("sendAudio") , chat_id(to_string(C.getId())), audio(audio)
 {
 
 }
 
-sendAudio::sendAudio(int chat_id, std::string audio) : telegram_method("sendAudio") ,chat_id(to_string(chat_id)) , audio(audio)
+sendAudio::sendAudio(int chat_id, std::string audio) : telegram_methodJSON("sendAudio"),telegram_methodMultipart("sendAudio") ,chat_id(to_string(chat_id)) , audio(audio)
 {
 
 }
 
-sendAudio::sendAudio(string chat_id, std::string audio) : telegram_method("sendAudio") ,chat_id(chat_id) , audio(audio)
+sendAudio::sendAudio(string chat_id, std::string audio) : telegram_methodJSON("sendAudio"),telegram_methodMultipart("sendAudio") ,chat_id(chat_id) , audio(audio)
 {
 
 }
@@ -72,6 +72,24 @@ Json::Value sendAudio::toJson() {
 
     return Outgoing;
 
+}
+
+void sendAudio::add_to_post(struct curl_httppost **start, struct curl_httppost **end) {
+    curl_formadd(start,end,
+                 CURLFORM_COPYNAME,"chat_id",
+                 CURLFORM_COPYCONTENTS,chat_id.c_str(),
+                 CURLFORM_END);
+    curl_formadd(start,end,
+                 CURLFORM_COPYNAME,"photo",
+                 CURLFORM_FILE,audio.c_str(),
+                 CURLFORM_END);
+    if(caption){
+        curl_formadd(start,end,
+                     CURLFORM_COPYNAME,"caption",
+                     CURLFORM_COPYCONTENTS,caption.value().c_str(),
+                     CURLFORM_END);
+    }
+    //TODO add other fields
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,10 +184,3 @@ const optional<int> &sendAudio::getReply_to_message_id() const {
 const optional<ReplyMarkup> &sendAudio::getReply_markup() const {
     return reply_markup;
 }
-
-
-
-
-
-
-
