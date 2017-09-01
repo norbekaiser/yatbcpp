@@ -24,7 +24,8 @@ using namespace std;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ReplyKeyboardRemove::ReplyKeyboardRemove() : remove_keyboard(true)
+ReplyKeyboardRemove::ReplyKeyboardRemove() :
+        remove_keyboard(true)
 {
 
 }

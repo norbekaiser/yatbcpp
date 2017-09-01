@@ -23,7 +23,8 @@ using namespace yatbcpp;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-getMe::getMe() : telegram_methodJSON("getMe")
+getMe::getMe() :
+        telegram_methodJSON("getMe")
 {
 
 }

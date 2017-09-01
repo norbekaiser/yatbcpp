@@ -27,7 +27,8 @@ using namespace std;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-UserProfilePhotos::UserProfilePhotos(int total_count, std::vector<std::vector<PhotoSize>> photos) : total_count(total_count) , photos(photos)
+UserProfilePhotos::UserProfilePhotos(int total_count, std::vector<std::vector<PhotoSize>> photos) :
+        total_count(total_count) , photos(photos)
 {
 
 }

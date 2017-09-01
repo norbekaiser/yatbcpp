@@ -27,7 +27,8 @@ using namespace std;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ChatMember::ChatMember(User user, std::string status) : user(user), status(status)
+ChatMember::ChatMember(User user, std::string status) :
+        user(user), status(status)
 {
 
 }

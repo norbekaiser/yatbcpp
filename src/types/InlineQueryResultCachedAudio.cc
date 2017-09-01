@@ -9,69 +9,48 @@
 //        2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
 //    
 //        3. This notice may not be removed or altered from any source distribution.
-#include <string>
-#if __has_include(<optional>) 
-#include <optional> 
-#else 
-#include <experimental/optional> 
-#define optional experimental::optional 
-#endif 
-#include "types/PhotoSize.h"
-#include "types/Document.h"
+#include <iostream>
+#include "types/InlineQueryResultCachedAudio.h"
 
 using namespace yatbcpp;
 using namespace std;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Constructor Section                                                                                                //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-Document::Document(std::string file_id) :
-        file_id(file_id)
+InlineQueryResultCachedAudio::InlineQueryResultCachedAudio(std::string id, std::string audio_file_id):
+        InlineQueryResult("audio",id),
+        audio_file_id(audio_file_id)
 {
 
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Outgoing Section                                                                                                   //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Json::Value InlineQueryResultCachedAudio::toJson(){
+    std::cout << "VoiceJSON" << std::endl;
+    Json::Value Outgoing;
+    Outgoing["type"] = getType();//since this is inherited, get it from above?
+    Outgoing["id"] = getId();
+    Outgoing["audio_file_id"] = getAudio_file_id();
+    if(getCaption()){
+        Outgoing["caption"] = getCaption().value();
+    }
+    //TODO reply markup and input message content
+    return  Outgoing;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Setter Section                                                                                                     //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Document::setThumb(const optional<PhotoSize> &thumb) {
-    Document::thumb = thumb;
-}
-
-void Document::setFile_name(const optional<string> &file_name) {
-    Document::file_name = file_name;
-}
-
-void Document::setMime_type(const optional<string> &mime_type) {
-    Document::mime_type = mime_type;
-}
-
-void Document::setFile_size(const optional<int> &file_size) {
-    Document::file_size = file_size;
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Getter Section                                                                                                     //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const string &Document::getFile_id() const {
-    return file_id;
+const string &InlineQueryResultCachedAudio::getAudio_file_id() const {
+    return audio_file_id;
 }
 
-const optional<PhotoSize> &Document::getThumb() const {
-    return thumb;
-}
-
-const optional<string> &Document::getFile_name() const {
-    return file_name;
-}
-
-const optional<string> &Document::getMime_type() const {
-    return mime_type;
-}
-
-const optional<int> &Document::getFile_size() const {
-    return file_size;
+const optional<string> &InlineQueryResultCachedAudio::getCaption() const {
+    return caption;
 }

@@ -9,52 +9,50 @@
 //        2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
 //    
 //        3. This notice may not be removed or altered from any source distribution.
-#include <string>
-#if __has_include(<optional>) 
-#include <optional> 
-#else 
-#include <experimental/optional> 
-#define optional experimental::optional 
-#endif 
-#include "types/KeyboardButton.h"
+#include <iostream>
+#include "types/InlineQueryResultCachedVoice.h"
 
 using namespace yatbcpp;
 using namespace std;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Constructor Section                                                                                                //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-KeyboardButton::KeyboardButton(std::string text) :
-        text(text)
+InlineQueryResultCachedVoice::InlineQueryResultCachedVoice(std::string id,std::string voice_file_id,std::string title) :
+        InlineQueryResult("audio",id),
+        voice_file_id(voice_file_id), title(title)
 {
 
 }
+
+Json::Value InlineQueryResultCachedVoice::toJson(){
+    std::cout << "VoiceJSON" << std::endl;
+    Json::Value Outgoing;
+    Outgoing["type"] = getType();//since this is inherited, get it from above?
+    Outgoing["id"] = getId();
+    Outgoing["voice_file_id"] = getVoice_file_id();
+    Outgoing["title"] = getTitle();
+    if(getCaption()){
+        Outgoing["caption"] = getCaption().value();
+    }
+    //TODO reply markup and input message content
+    return  Outgoing;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Setter Section                                                                                                     //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void KeyboardButton::setRequest_contact(const optional<bool> &request_contact) {
-    KeyboardButton::request_contact = request_contact;
-}
-
-void KeyboardButton::setRequest_location(const optional<bool> &request_location) {
-    KeyboardButton::request_location = request_location;
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Getter Section                                                                                                     //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const string &KeyboardButton::getText() const {
-    return text;
+const string &InlineQueryResultCachedVoice::getVoice_file_id() const {
+    return voice_file_id;
 }
 
-const optional<bool> &KeyboardButton::getRequest_contact() const {
-    return request_contact;
+const string &InlineQueryResultCachedVoice::getTitle() const {
+    return title;
 }
 
-const optional<bool> &KeyboardButton::getRequest_location() const {
-    return request_location;
+const optional<string> &InlineQueryResultCachedVoice::getCaption() const {
+    return caption;
 }

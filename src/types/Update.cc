@@ -24,7 +24,8 @@ using namespace std;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Update::Update(int update_id) : update_id(update_id)
+Update::Update(int update_id) :
+        update_id(update_id)
 {
 
 }
@@ -49,6 +50,10 @@ void Update::setEdited_channel_post(const optional<Message> &edited_channel_post
     Update::edited_channel_post = edited_channel_post;
 }
 
+void Update::setInlineQuery(const optional<InlineQuery> &inlineQuery) {
+    Update::inlineQuery = inlineQuery;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Getter Section                                                                                                     //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,4 +76,8 @@ const optional<Message> &Update::getChannel_post() const {
 
 const optional<Message> &Update::getEdited_channel_post() const {
     return edited_channel_post;
+}
+
+const optional<InlineQuery> &Update::getInlineQuery() const {
+    return inlineQuery;
 }

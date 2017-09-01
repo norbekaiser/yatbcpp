@@ -24,7 +24,8 @@ using namespace std;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ForceReply::ForceReply() : force_reply(true)
+ForceReply::ForceReply() :
+        force_reply(true)
 {
 
 }

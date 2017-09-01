@@ -9,40 +9,18 @@
 //        2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
 //    
 //        3. This notice may not be removed or altered from any source distribution.
-//
-// Created by norbert on 21.08.17.
-//
+#include "types/InlineQueryResult.h"
 
-#ifndef YATBCPP_TYPES_H
-#define YATBCPP_TYPES_H
+InlineQueryResult::InlineQueryResult(std::string type,std::string id):
+        type(type), id(id)
+{
 
-#include "Audio.h"
-#include "Chat.h"
-#include "chat_type.h"
-#include "ChatMember.h"
-#include "ChatPhoto.h"
-#include "Contact.h"
-#include "Document.h"
-#include "File.h"
-#include "ForceReply.h"
-#include "InlineQuery.h"
-#include "InlineQueryResult.h"
-#include "InlineQueryResultCachedAudio.h"
-#include "InlineQueryResultCachedVoice.h"
-#include "InputMessageContent.h"
-#include "KeyboardButton.h"
-#include "Location.h"
-#include "Message.h"
-#include "MessageEntity.h"
-#include "PhotoSize.h"
-#include "ReplyMarkup.h"
-#include "UserProfilePhotos.h"
-#include "ReplyKeyboardMarkup.h"
-#include "Update.h"
-#include "User.h"
-#include "Venue.h"
-#include "Video.h"
-#include "VideoNote.h"
-#include "Voice.h"
+}
 
-#endif //YATBCPP_TYPES_H
+const std::string &InlineQueryResult::getType() const {
+    return type;
+}
+
+const std::string &InlineQueryResult::getId() const {
+    return id;
+}

@@ -40,7 +40,8 @@ using namespace std;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Message::Message(int message_id, int date, Chat chat) : message_id(message_id), date(date), chat(chat)
+Message::Message(int message_id, int date, Chat chat) :
+        message_id(message_id), date(date), chat(chat)
 {
 
 }
