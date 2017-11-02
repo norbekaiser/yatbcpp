@@ -24,11 +24,18 @@ using namespace std;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ForceReply::ForceReply() :
+ForceReply::ForceReply():
         force_reply(true)
 {
 
 }
+
+ForceReply::ForceReply(const ForceReply& ForceReply):
+        force_reply(ForceReply.force_reply)
+{
+        selective = ForceReply.selective;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Setter Section                                                                                                     //
