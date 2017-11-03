@@ -4,7 +4,7 @@ services:
   - docker
 jobs:
   include:
-    - stage: build
+    - stage: build ubuntu latest
       script:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -22,7 +22,7 @@ jobs:
         - docker cp . cont:/opt/yatbcpp
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
         - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. ; make "
-    - stage: build
+    - stage: build ubuntu rolling
       script:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -40,3 +40,23 @@ jobs:
         - docker cp . cont:/opt/yatbcpp
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
         - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. ; make "
+    - stage: build ubuntu latest gcc-7
+      script:
+        - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        - sudo apt-get update
+        - sudo apt-get -y install docker-ce
+        - docker pull ubuntu:latest
+        - docker images
+        - docker run --name cont -td ubuntu:latest 
+        - docker exec cont /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y"
+        - docker exec cont /bin/bash -c "apt-get install build-essential cmake -y"
+        - docker exec cont /bin/bash -c "apt-get install libjsoncpp-dev libcurl4-openssl-dev -y"
+        - docker exec cont /bin/bash -c "apt-get install software-properties-common"
+        - docker exec cont /bin/bash -c "add-apt-repository ppa:ubuntu-toolchain-r/test ; apt-get update ; apt-get install gcc-7 g++-7 -y;"
+        - docker exec cont /bin/bash -c "mkdir -p /opt/yatbcpp"
+        - docker exec cont cat /etc/lsb-release
+        - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
+        - docker cp . cont:/opt/yatbcpp
+        - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
+        - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. -DCMAKE_C_COMPILER=/usr/bin/gcc-7 -DCMAKE_CXX_COMPILER=/usr/bin/g++-7 ; make "
