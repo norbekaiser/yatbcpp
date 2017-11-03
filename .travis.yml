@@ -17,7 +17,7 @@ jobs:
         - docker exec cont /bin/bash -c "apt-get install build-essential cmake -y"
         - docker exec cont /bin/bash -c "apt-get install libjsoncpp-dev libcurl4-openssl-dev -y"
         - docker exec cont /bin/bash -c "mkdir -p /opt/yatbcpp"
-        - docker exec cont cat /etc/lsb-release
+        - docker exec cont cat /etc/debian_version
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
         - docker cp . cont:/opt/yatbcpp
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
