@@ -48,7 +48,7 @@ jobs:
         - sudo apt-get -y install docker-ce
         - docker pull ubuntu:rolling
         - docker images
-        - docker run --name cont -td ubuntu
+        - docker run --name cont -td ubuntu:rolling
         - docker exec cont /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y"
         - docker exec cont /bin/bash -c "apt-get install build-essential cmake -y"
         - docker exec cont /bin/bash -c "apt-get install libjsoncpp-dev libcurl4-openssl-dev -y"
