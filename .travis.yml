@@ -39,7 +39,7 @@ jobs:
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
         - docker cp . cont:/opt/yatbcpp
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
-        - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. -DCMAKE_C_COMPILER=$(which clang) -DCMAKE_CXX_COMPILER=$(which clang++) ; make "
+        - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ ; make "
     - stage: build ubuntu latest
       script:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
