@@ -5,11 +5,12 @@ services:
 jobs:
   include:
     - stage: build debian latest
-      script:
+      before_script:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         - sudo apt-get update
         - sudo apt-get -y install docker-ce
+      script:
         - docker pull debian:latest
         - docker images
         - docker run --name cont -td debian:latest 
@@ -23,11 +24,12 @@ jobs:
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
         - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. ; make "
     - stage: build debian latest clang
-      script:
+      before_script:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         - sudo apt-get update
         - sudo apt-get -y install docker-ce
+      script:
         - docker pull debian:latest
         - docker images
         - docker run --name cont -td debian:latest 
@@ -41,11 +43,12 @@ jobs:
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
         - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ ; make "
     - stage: build ubuntu latest
-      script:
+      before_script:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         - sudo apt-get update
         - sudo apt-get -y install docker-ce
+      script:
         - docker pull ubuntu:latest
         - docker images
         - docker run --name cont -td ubuntu:latest 
@@ -59,11 +62,12 @@ jobs:
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
         - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. ; make "
     - stage: build ubuntu rolling
-      script:
+      before_script:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         - sudo apt-get update
         - sudo apt-get -y install docker-ce
+      script:
         - docker pull ubuntu:rolling
         - docker images
         - docker run --name cont -td ubuntu:rolling
@@ -77,11 +81,12 @@ jobs:
         - docker exec cont /bin/bash -c "ls -al /opt/yatbcpp"
         - docker exec cont /bin/bash -c "cd /opt/yatbcpp; mkdir build; cd build; cmake .. ; make "
     - stage: build ubuntu latest gcc-7
-      script:
+      before_script:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         - sudo apt-get update
         - sudo apt-get -y install docker-ce
+      script:
         - docker pull ubuntu:latest
         - docker images
         - docker run --name cont -td ubuntu:latest 
