@@ -1,4 +1,4 @@
-//    Copyright (c) 2017 Norbert Rühl
+//    Copyright (c) 2017,2018 Norbert Rühl
 //    
 //    This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
 //    
@@ -16,7 +16,7 @@
 using namespace yatbcpp;
 using namespace std;
 
-answerInlineQuery::answerInlineQuery(std::string inline_query_id,vector<InlineQueryResult*> results) :
+answerInlineQuery::answerInlineQuery(std::string inline_query_id,vector<std::shared_ptr<InlineQueryResult>> results) :
         telegram_simplemethodJSON("answerInlineQuery"),
         inline_query_id(inline_query_id), results(results)
 {
@@ -61,10 +61,11 @@ Json::Value answerInlineQuery::toJson(){
 /**
  * Adds an Inline Query Result to the Results, however only 50 can be handled?
  * todo maybe separate or add page support?, todo maybe add pass by reference instead of by ptr?
+ * current state is a smart ptr
  * @param IQR
  */
-void answerInlineQuery::addInlineQueryResult(InlineQueryResult *IQR) {
-    this->results.push_back(IQR);
+void answerInlineQuery::addInlineQueryResult(std::shared_ptr<InlineQueryResult>IQR) {
+    this->results.push_back(move(IQR));
 }
 
 void answerInlineQuery::setCache_time(const optional<int> &cache_time) {
