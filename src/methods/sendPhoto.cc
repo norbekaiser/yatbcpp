@@ -27,23 +27,23 @@ using namespace yatbcpp;
 // Constructor Section                                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-sendPhoto::sendPhoto(Chat C, std::string photo) :
+sendPhoto::sendPhoto(Chat C, string photo) :
         telegram_methodJSON("sendPhoto"), telegram_methodMultipart("sendPhoto"),
-        chat_id(to_string(C.getId())), Photo(photo)
+        chat_id(to_string(C.getId())), Photo(move(photo))
 {
 
 }
 
-sendPhoto::sendPhoto(int chat_id, std::string photo) :
+sendPhoto::sendPhoto(int64_t chat_id, string photo) :
         telegram_methodJSON("sendPhoto"), telegram_methodMultipart("sendPhoto"),
-        chat_id(to_string(chat_id)), Photo(photo)
+        chat_id(to_string(chat_id)), Photo(move(photo))
 {
 
 }
 
-sendPhoto::sendPhoto(string chat_id, std::string photo) :
+sendPhoto::sendPhoto(string chat_id, string photo) :
         telegram_methodJSON("sendPhoto"), telegram_methodMultipart("sendPhoto"),
-        chat_id(chat_id), Photo(photo)
+        chat_id(move(chat_id)), Photo(move(photo))
 {
 
 }
@@ -110,11 +110,11 @@ void sendPhoto::setCaption(const optional<string> &caption) {
 }
 
 
-void sendPhoto::setDisable_notification(const std::optional<bool> &disable_notification) {
+void sendPhoto::setDisable_notification(const optional<bool> &disable_notification) {
     sendPhoto::disable_notification = disable_notification;
 }
 
-void sendPhoto::setReply_to_message_id(const std::optional<int> &reply_to_message_id) {
+void sendPhoto::setReply_to_message_id(const optional<int> &reply_to_message_id) {
     sendPhoto::reply_to_message_id = reply_to_message_id;
 }
 
@@ -163,7 +163,7 @@ const optional<bool> &sendPhoto::getDisable_notification() const {
     return disable_notification;
 }
 
-const optional<int> &sendPhoto::getReply_to_message_id() const {
+const optional<int32_t> &sendPhoto::getReply_to_message_id() const {
     return reply_to_message_id;
 }
 
