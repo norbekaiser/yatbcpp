@@ -58,7 +58,7 @@ void Document::setMime_type(const optional<string> &mime_type) {
     Document::mime_type = mime_type;
 }
 
-void Document::setFile_size(const optional<int> &file_size) {
+void Document::setFile_size(const optional<int32_t> &file_size) {
     Document::file_size = file_size;
 }
 
@@ -82,6 +82,6 @@ const optional<string> &Document::getMime_type() const {
     return mime_type;
 }
 
-const optional<int> &Document::getFile_size() const {
+const optional<int32_t> &Document::getFile_size() const {
     return file_size;
 }

@@ -58,7 +58,7 @@ ChatMember::ChatMember(const ChatMember& ChatMember):
 // Setter Section                                                                                                     //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ChatMember::setUntil_date(const optional<int> &until_date) {
+void ChatMember::setUntil_date(const optional<int32_t> &until_date) {
     ChatMember::until_date = until_date;
 }
 
@@ -126,7 +126,7 @@ const chatmember_status &ChatMember::getStatus() const {
     return status;
 }
 
-const optional<int> &ChatMember::getUntil_date() const {
+const optional<int32_t> &ChatMember::getUntil_date() const {
     return until_date;
 }
 
